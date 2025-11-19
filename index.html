@@ -1,38 +1,575 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eray Duzenli - Developer</title>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        .container {
-            text-align: center;
-            padding: 2rem;
-        }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Nimets – Recipe App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Nimets is a cooking & recipe app with clear step-by-step instructions, photos and favorites. Discover delicious recipes and save your favorites."
+  />
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --card-bg: #ffffff;
+      --accent: #e67e22;
+      --accent-dark: #cf6a13;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #fff7ed, #f9fafb);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--accent-dark);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: conic-gradient(
+        from 180deg,
+        #f97316,
+        #ef4444,
+        #ec4899,
+        #f97316
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .logo-text-main {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-text-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      color: var(--accent-dark);
+      text-decoration: none;
+    }
+
+    .nav-pill {
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      background: #111827;
+      color: #f9fafb;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow);
+      text-decoration: none;
+    }
+
+    .nav-pill:hover {
+      background: #020617;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .page {
+        padding: 24px 16px 50px;
+      }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 4px;
+      border-radius: var(--radius-pill);
+      background: rgba(248, 250, 252, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      backdrop-filter: blur(10px);
+      margin-bottom: 14px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .badge-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.3);
+    }
+
+    h1 {
+      font-size: clamp(30px, 4vw, 40px);
+      margin-bottom: 10px;
+      letter-spacing: -0.025em;
+    }
+
+    .headline-highlight {
+      background: linear-gradient(120deg, #fed7aa, #f97316);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 460px;
+      margin-bottom: 22px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .btn-primary {
+      padding: 11px 22px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn-primary span.icon {
+      font-size: 16px;
+    }
+
+    .btn-ghost {
+      padding: 10px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--text-muted);
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .mini-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 26px;
+      max-width: 460px;
+    }
+
+    @media (max-width: 600px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature-card {
+      padding: 12px 13px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 13px;
+      box-shadow: 0 8px 18px rgba(148, 163, 184, 0.2);
+    }
+
+    .feature-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-dark);
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .feature-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .feature-text {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* Right column "phone" preview */
+    .phone-frame {
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      aspect-ratio: 9 / 16;
+      border-radius: 36px;
+      padding: 12px;
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      box-shadow: 0 25px 60px rgba(15, 23, 42, 0.6);
+      position: relative;
+      color: #f9fafb;
+    }
+
+    .phone-inner {
+      border-radius: 28px;
+      background: linear-gradient(180deg, #0b1120, #020617);
+      padding: 14px 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .phone-notch {
+      width: 40%;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      margin: 0 auto 4px;
+    }
+
+    .phone-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .phone-chip {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .phone-chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .phone-hero {
+      border-radius: 18px;
+      padding: 9px 10px 10px;
+      background: radial-gradient(circle at top left, #f97316, #fb923c);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      color: #111827;
+    }
+
+    .phone-hero-title {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .phone-hero-sub {
+      font-size: 11px;
+      color: #4b5563;
+    }
+
+    .phone-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .phone-tag {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      color: #374151;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .phone-recipe-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 2px;
+      font-size: 11px;
+    }
+
+    .phone-recipe-card {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 8px;
+      padding: 7px;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+    }
+
+    .phone-thumb {
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f97316, #facc15);
+    }
+
+    .phone-recipe-title {
+      font-weight: 600;
+      font-size: 11px;
+      margin-bottom: 3px;
+    }
+
+    .phone-recipe-meta {
+      font-size: 10px;
+      color: #9ca3af;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .phone-dot-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: #9ca3af;
+    }
+
+    .phone-footer {
+      margin-top: auto;
+      padding-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 9px;
+      color: #9ca3af;
+    }
+
+    .phone-btn {
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #f97316;
+      color: #111827;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Eray Duzenli</h1>
-        <p>iOS Developer</p>
-    </div>
+  <div class="page">
+    <header>
+      <div class="logo">
+        <div class="logo-mark">N</div>
+        <div>
+          <div class="logo-text-main">Nimets</div>
+          <div class="logo-text-sub">Home-cooked recipes, made simple</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <!-- Replace # with your Instagram or App Store link when live -->
+        <a href="https://www.instagram.com/nimetli_lezzetler/" class="nav-pill" target="_blank" rel="noopener">
+          Follow on Instagram
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <div class="badge">
+          <div class="badge-dot"></div>
+          <span>Coming soon to the App Store</span>
+        </div>
+        <h1>
+          Cook delicious meals with
+          <span class="headline-highlight">step-by-step recipes</span>.
+        </h1>
+        <p class="subtitle">
+          Nimets helps you discover and cook tasty homemade recipes
+          with clear instructions, ingredient lists, and beautiful photos –
+          whether you’re a beginner or a pro in the kitchen.
+        </p>
+
+        <div class="cta-row">
+          <a href="https://apps.apple.com/us/app/nimets/id6739279152" class="btn-primary">
+            <span class="icon"></span>
+            <span>View on the App Store</span>
+          </a>
+          <a href="mailto:erayduezenli@icloud.com" class="btn-ghost">
+            ✉️ Contact developer
+          </a>
+        </div>
+        <p class="mini-note">
+          Have feedback or questions? Email
+          <a href="mailto:erayduezenli@icloud.com">erayduezenli@icloud.com</a>
+        </p>
+
+        <div id="features" class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-label">Core</div>
+            <div class="feature-title">Hand-picked recipes</div>
+            <p class="feature-text">
+              Explore curated recipes with clear ingredients, timings, and
+              serving suggestions.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-label">Experience</div>
+            <div class="feature-title">Step-by-step cooking</div>
+            <p class="feature-text">
+              Follow each step easily – perfect for busy days and relaxed
+              weekends alike.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-label">Personal</div>
+            <div class="feature-title">Save your favorites</div>
+            <p class="feature-text">
+              Quickly access the recipes you cook the most, without scrolling
+              endlessly.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-label">Inspiration</div>
+            <div class="feature-title">New ideas</div>
+            <p class="feature-text">
+              Get inspired by new dishes and seasonal meals from
+              <strong>@nimetli_lezzetler</strong>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+<section>
+  <img src="screenshot.png" alt="App Screenshot" style="
+    width:100%;
+    max-width:360px;
+    border-radius:28px;
+    box-shadow:0 25px 60px rgba(15, 23, 42, 0.6);
+    display:block;
+    margin:0 auto;
+  ">
+</section>
+
+    </main>
+
+    <footer id="contact">
+      <div>
+        © 2025 Nimets. All rights reserved.
+      </div>
+      <div class="footer-links">
+        <a href="https://erayosso.github.io/nimets-privacy/" target="_blank" rel="noopener">Privacy Policy</a>
+        <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Terms of Use</a>
+        <a href="mailto:erayduezenli@icloud.com">Contact</a>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
