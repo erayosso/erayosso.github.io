@@ -459,87 +459,126 @@
       gap: 12px;
       flex-wrap: wrap;
     }
+
+    /* Language Switcher */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .lang-btn {
+      padding: 6px 10px;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn:hover {
+      color: var(--text-main);
+    }
+
+    .lang-btn.active {
+      background: #111827;
+      color: #f9fafb;
+    }
   </style>
 </head>
 <body>
   <div class="page">
     <header>
       <div class="logo">
-        <div class="logo-mark">N</div>
+        <img src="Icon-1024 1.png" alt="Nimets" class="logo-mark" style="padding:0; background:none; box-shadow:var(--shadow);">
         <div>
           <div class="logo-text-main">Nimets</div>
-          <div class="logo-text-sub">Home-cooked recipes, made simple</div>
+          <div class="logo-text-sub" data-i18n="logo.tagline">Home-cooked recipes, made simple</div>
         </div>
       </div>
       <nav>
-        <a href="#features" class="nav-link">Features</a>
-        <a href="#contact" class="nav-link">Contact</a>
-        <!-- Replace # with your Instagram or App Store link when live -->
-        <a href="https://www.instagram.com/nimetli_lezzetler/" class="nav-pill" target="_blank" rel="noopener">
+        <a href="#contact" class="nav-link" data-i18n="nav.contact">Contact</a>
+        <a href="https://www.instagram.com/nimetli_lezzetler/" class="nav-pill" target="_blank" rel="noopener" data-i18n="nav.instagram">
           Follow on Instagram
         </a>
+        <div class="lang-switcher">
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="tr">TR</button>
+          <button class="lang-btn" data-lang="de">DE</button>
+        </div>
       </nav>
     </header>
 
     <main>
       <section>
         <div class="badge">
-          <div class="badge-dot"></div>
-          <span>Coming soon to the App Store</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" style="margin-left: 4px;">
+            <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92z" fill="#00C1FF"/>
+            <path d="M17.556 8.235l-3.764 3.764 3.765 3.765 4.243-2.39c.655-.37.655-1.378 0-1.748l-4.244-2.39z" fill="#FFDA00"/>
+            <path d="M3.61 1.814L14.883 13.09l-1.09 1.09L3.608 22.186a.996.996 0 0 1-.609-.92V2.734a1 1 0 0 1 .61-.92z" fill="#00F076"/>
+            <path d="M3.609 22.186l10.183-10.185L17.556 15.764l-13.34 7.52a.996.996 0 0 1-.607-1.098z" fill="#F33"/>
+          </svg>
+          <span data-i18n="badge.comingSoon">Coming soon to Play Store</span>
         </div>
-        <h1>
-          Cook delicious meals with
-          <span class="headline-highlight">step-by-step recipes</span>.
+        <h1 data-i18n="hero.title">
+          Cook delicious meals with <span class="headline-highlight">step-by-step recipes</span>.
         </h1>
-        <p class="subtitle">
+        <p class="subtitle" data-i18n="hero.subtitle">
           Nimets helps you discover and cook tasty homemade recipes
           with clear instructions, ingredient lists, and beautiful photos –
-          whether you’re a beginner or a pro in the kitchen.
+          whether you're a beginner or a pro in the kitchen.
         </p>
 
         <div class="cta-row">
           <a href="https://apps.apple.com/us/app/nimets/id6739279152" class="btn-primary">
             <span class="icon"></span>
-            <span>View on the App Store</span>
+            <span data-i18n="cta.appStore">View on the App Store</span>
           </a>
           <a href="mailto:erayduezenli@icloud.com" class="btn-ghost">
-            ✉️ Contact developer
+            <span data-i18n="cta.contact">✉️ Contact developer</span>
           </a>
         </div>
         <p class="mini-note">
-          Have feedback or questions? Email
+          <span data-i18n="cta.feedback">Have feedback or questions? Email</span>
           <a href="mailto:erayduezenli@icloud.com">erayduezenli@icloud.com</a>
         </p>
 
         <div id="features" class="feature-grid">
           <div class="feature-card">
-            <div class="feature-label">Core</div>
-            <div class="feature-title">Hand-picked recipes</div>
-            <p class="feature-text">
+            <div class="feature-label" data-i18n="feature1.label">Core</div>
+            <div class="feature-title" data-i18n="feature1.title">Hand-picked recipes</div>
+            <p class="feature-text" data-i18n="feature1.text">
               Explore curated recipes with clear ingredients, timings, and
               serving suggestions.
             </p>
           </div>
           <div class="feature-card">
-            <div class="feature-label">Experience</div>
-            <div class="feature-title">Step-by-step cooking</div>
-            <p class="feature-text">
+            <div class="feature-label" data-i18n="feature2.label">Experience</div>
+            <div class="feature-title" data-i18n="feature2.title">Step-by-step cooking</div>
+            <p class="feature-text" data-i18n="feature2.text">
               Follow each step easily – perfect for busy days and relaxed
               weekends alike.
             </p>
           </div>
           <div class="feature-card">
-            <div class="feature-label">Personal</div>
-            <div class="feature-title">Save your favorites</div>
-            <p class="feature-text">
+            <div class="feature-label" data-i18n="feature3.label">Personal</div>
+            <div class="feature-title" data-i18n="feature3.title">Save your favorites</div>
+            <p class="feature-text" data-i18n="feature3.text">
               Quickly access the recipes you cook the most, without scrolling
               endlessly.
             </p>
           </div>
           <div class="feature-card">
-            <div class="feature-label">Inspiration</div>
-            <div class="feature-title">New ideas</div>
-            <p class="feature-text">
+            <div class="feature-label" data-i18n="feature4.label">Inspiration</div>
+            <div class="feature-title" data-i18n="feature4.title">New ideas</div>
+            <p class="feature-text" data-i18n="feature4.text">
               Get inspired by new dishes and seasonal meals from
               <strong>@nimetli_lezzetler</strong>.
             </p>
@@ -561,15 +600,135 @@
     </main>
 
     <footer id="contact">
-      <div>
+      <div data-i18n="footer.copyright">
         © 2025 Nimets. All rights reserved.
       </div>
       <div class="footer-links">
-        <a href="https://erayosso.github.io/nimets-privacy/" target="_blank" rel="noopener">Privacy Policy</a>
-        <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Terms of Use</a>
-        <a href="mailto:erayduezenli@icloud.com">Contact</a>
+        <a href="https://erayosso.github.io/nimets-privacy/" target="_blank" rel="noopener" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener" data-i18n="footer.terms">Terms of Use</a>
+        <a href="mailto:erayduezenli@icloud.com" data-i18n="footer.contact">Contact</a>
       </div>
     </footer>
   </div>
+
+  <script>
+    const translations = {
+      en: {
+        'logo.tagline': 'Home-cooked recipes, made simple',
+        'nav.contact': 'Contact',
+        'nav.instagram': 'Follow on Instagram',
+        'badge.comingSoon': 'Coming soon to Play Store',
+        'hero.title': 'Cook delicious meals with <span class="headline-highlight">step-by-step recipes</span>.',
+        'hero.subtitle': 'Nimets helps you discover and cook tasty homemade recipes with clear instructions, ingredient lists, and beautiful photos – whether you\'re a beginner or a pro in the kitchen.',
+        'cta.appStore': 'View on the App Store',
+        'cta.contact': '✉️ Contact developer',
+        'cta.feedback': 'Have feedback or questions? Email',
+        'feature1.label': 'Core',
+        'feature1.title': 'Hand-picked recipes',
+        'feature1.text': 'Explore curated recipes with clear ingredients, timings, and serving suggestions.',
+        'feature2.label': 'Experience',
+        'feature2.title': 'Step-by-step cooking',
+        'feature2.text': 'Follow each step easily – perfect for busy days and relaxed weekends alike.',
+        'feature3.label': 'Personal',
+        'feature3.title': 'Save your favorites',
+        'feature3.text': 'Quickly access the recipes you cook the most, without scrolling endlessly.',
+        'feature4.label': 'Inspiration',
+        'feature4.title': 'New ideas',
+        'feature4.text': 'Get inspired by new dishes and seasonal meals from <strong>@nimetli_lezzetler</strong>.',
+        'footer.copyright': '© 2025 Nimets. All rights reserved.',
+        'footer.privacy': 'Privacy Policy',
+        'footer.terms': 'Terms of Use',
+        'footer.contact': 'Contact'
+      },
+      tr: {
+        'logo.tagline': 'Ev yemekleri, basit ve lezzetli',
+        'nav.contact': 'İletişim',
+        'nav.instagram': 'Instagram\'da Takip Et',
+        'badge.comingSoon': 'Yakında Play Store\'da',
+        'hero.title': '<span class="headline-highlight">Adım adım tariflerle</span> lezzetli yemekler pişirin.',
+        'hero.subtitle': 'Nimets, net talimatlar, malzeme listeleri ve güzel fotoğraflarla lezzetli ev yapımı tarifleri keşfetmenize ve pişirmenize yardımcı olur – ister mutfakta yeni başlayan olun ister profesyonel.',
+        'cta.appStore': 'App Store\'da Görüntüle',
+        'cta.contact': '✉️ Geliştiriciyle iletişime geç',
+        'cta.feedback': 'Geri bildiriminiz veya sorularınız mı var? E-posta:',
+        'feature1.label': 'Temel',
+        'feature1.title': 'Özenle seçilmiş tarifler',
+        'feature1.text': 'Net malzemeler, süreler ve porsiyon önerileri ile özenle seçilmiş tarifleri keşfedin.',
+        'feature2.label': 'Deneyim',
+        'feature2.title': 'Adım adım pişirme',
+        'feature2.text': 'Her adımı kolayca takip edin – yoğun günler ve rahat hafta sonları için mükemmel.',
+        'feature3.label': 'Kişisel',
+        'feature3.title': 'Favorilerinizi kaydedin',
+        'feature3.text': 'En çok pişirdiğiniz tariflere sonsuz kaydırma yapmadan hızlıca erişin.',
+        'feature4.label': 'İlham',
+        'feature4.title': 'Yeni fikirler',
+        'feature4.text': '<strong>@nimetli_lezzetler</strong>\'den yeni yemekler ve mevsimlik tariflerden ilham alın.',
+        'footer.copyright': '© 2025 Nimets. Tüm hakları saklıdır.',
+        'footer.privacy': 'Gizlilik Politikası',
+        'footer.terms': 'Kullanım Koşulları',
+        'footer.contact': 'İletişim'
+      },
+      de: {
+        'logo.tagline': 'Hausgemachte Rezepte, einfach gemacht',
+        'nav.contact': 'Kontakt',
+        'nav.instagram': 'Auf Instagram folgen',
+        'badge.comingSoon': 'Bald im Play Store',
+        'hero.title': 'Kochen Sie köstliche Gerichte mit <span class="headline-highlight">Schritt-für-Schritt-Rezepten</span>.',
+        'hero.subtitle': 'Nimets hilft Ihnen, leckere hausgemachte Rezepte mit klaren Anleitungen, Zutatenlisten und schönen Fotos zu entdecken und zu kochen – egal ob Anfänger oder Profi in der Küche.',
+        'cta.appStore': 'Im App Store ansehen',
+        'cta.contact': '✉️ Entwickler kontaktieren',
+        'cta.feedback': 'Feedback oder Fragen? E-Mail:',
+        'feature1.label': 'Kern',
+        'feature1.title': 'Handverlesene Rezepte',
+        'feature1.text': 'Entdecken Sie kuratierte Rezepte mit klaren Zutaten, Zeiten und Portionsvorschlägen.',
+        'feature2.label': 'Erlebnis',
+        'feature2.title': 'Schritt-für-Schritt kochen',
+        'feature2.text': 'Folgen Sie jedem Schritt einfach – perfekt für stressige Tage und entspannte Wochenenden.',
+        'feature3.label': 'Persönlich',
+        'feature3.title': 'Favoriten speichern',
+        'feature3.text': 'Greifen Sie schnell auf Ihre meistgekochten Rezepte zu, ohne endlos zu scrollen.',
+        'feature4.label': 'Inspiration',
+        'feature4.title': 'Neue Ideen',
+        'feature4.text': 'Lassen Sie sich von neuen Gerichten und saisonalen Mahlzeiten von <strong>@nimetli_lezzetler</strong> inspirieren.',
+        'footer.copyright': '© 2025 Nimets. Alle Rechte vorbehalten.',
+        'footer.privacy': 'Datenschutz',
+        'footer.terms': 'Nutzungsbedingungen',
+        'footer.contact': 'Kontakt'
+      }
+    };
+
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      localStorage.setItem('nimets-lang', lang);
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+    }
+
+    function detectLanguage() {
+      const saved = localStorage.getItem('nimets-lang');
+      if (saved && translations[saved]) return saved;
+
+      const browserLang = navigator.language.slice(0, 2).toLowerCase();
+      if (translations[browserLang]) return browserLang;
+
+      return 'en';
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLanguage(btn.getAttribute('data-lang'));
+      });
+    });
+
+    setLanguage(detectLanguage());
+  </script>
 </body>
 </html>
